@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+model Student {
+  id         String   @id @default(uuid())
+  name       String
+  cohort     String
+  course     String
+  status     Status  // Enum field
+  dateJoined DateTime @default(now())
+  lastLogin  DateTime?
+}
